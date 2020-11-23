@@ -43,29 +43,33 @@ async function createEntities() {
 
   await orm!.em.clear()
 
-  console.log('Test1 Entity - optional ManyToOne to self (parent)')
+  console.log('**** Test1 Entity - This entity has an optional ManyToOne relation to itself (parent-child) ****')
   const test1 = await test1Repo!.findOneOrFail({ id: test1s[0].id })
   await test1Repo!.flush()
   await orm!.em.clear()
 
   // const test2 = await test2Repo!.findOneOrFail({ id: test2s[0].id }, ['test1'])
-  console.log('Test2 Entity - optional ManyToOne to self (parent) and test1')
+  console.log('**** Test2 Entity - This entity has an optional ManyToOne relation to itself (parent-child) as well as one to test2. No populate provided in query. ****')
   const test2 = await test2Repo!.findOneOrFail({ id: test2s[0].id })
   await test2Repo!.flush()
   await orm!.em.clear()
 
-  console.log('Test2 Entity - optional ManyToOne to self (parent) and test1 -- with populate for test1')
+  console.log('**** Test2 Entity - This entity has an optional ManyToOne relation to itself (parent-child) as well as one to test2. The relation to test1 is populated in the query.. ****')
   const test2b = await test2Repo!.findOneOrFail({ id: test2s[0].id }, ['test1'])
   await test2Repo!.flush()
   await orm!.em.clear()
 
-  console.log('Test3 Entity - optional ManyToOne to test1')
+  console.log('**** Test3 Entity - optional ManyToOne to test1. Not populated. ****')
   const test3 = await test3Repo!.findOneOrFail({ id: test3s[0].id })
   await test3Repo!.flush()
-
   await orm!.em.clear()
 
-  console.log('Test3 Entity - mandatory ManyToOne to test1')
+  console.log('**** Test3 Entity - optional ManyToOne to test1. Test1 relation is populated. ****')
+  const test3b = await test3Repo!.findOneOrFail({ id: test3s[0].id }, ['test1'])
+  await test3Repo!.flush()
+  await orm!.em.clear()
+
+  console.log('**** Test4 Entity - mandatory ManyToOne to test1 ****')
   const test4 = await test4Repo!.findOneOrFail({ id: test4s[0].id })
   await test4Repo!.flush()
   await orm!.em.clear()
