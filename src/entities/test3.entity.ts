@@ -1,15 +1,25 @@
-import { Collection, Entity, IdentifiedReference, ManyToOne, OneToMany, PrimaryKey, Property } from '@mikro-orm/core'
+import {
+  BigIntType,
+  Collection,
+  Entity,
+  IdentifiedReference,
+  ManyToOne,
+  OneToMany,
+  PrimaryKey,
+  Property,
+} from '@mikro-orm/core'
 import { v4 } from 'uuid'
+import { BaseEntity } from './base.entity'
 import Test1 from './test1.entity'
 
 @Entity()
-export default class Test3 {
+export default class Test3  {
   constructor(name: string) {
     this.name = name
   }
 
-  @PrimaryKey()
-  id = v4()
+  @PrimaryKey({ type: BigIntType })
+  id!: string
 
   @Property()
   name: string

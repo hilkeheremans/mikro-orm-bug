@@ -1,5 +1,15 @@
-import { Collection, Entity, IdentifiedReference, ManyToOne, OneToMany, PrimaryKey, Property } from '@mikro-orm/core'
+import {
+  BigIntType,
+  Collection,
+  Entity,
+  IdentifiedReference,
+  ManyToOne,
+  OneToMany,
+  PrimaryKey,
+  Property,
+} from '@mikro-orm/core'
 import { v4 } from 'uuid'
+import { BaseEntity } from './base.entity'
 import Test2 from './test2.entity'
 
 @Entity()
@@ -9,8 +19,8 @@ export default class Test1 {
     this.name = name
   }
 
-  @PrimaryKey()
-  id = v4()
+  @PrimaryKey({ type: BigIntType })
+  id!: string
 
   @Property()
   name: string
@@ -18,7 +28,7 @@ export default class Test1 {
   @ManyToOne(() => Test1, { nullable: true, wrappedReference: true })
   parent?: IdentifiedReference<Test1>
 
+
   @OneToMany(() => Test1, (event) => event.parent)
   children: Collection<Test1> = new Collection<Test1>(this)
-
 }

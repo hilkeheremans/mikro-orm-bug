@@ -1,4 +1,5 @@
 import {
+  BigIntType,
   Collection,
   Entity,
   IdentifiedReference,
@@ -9,6 +10,7 @@ import {
   Reference,
 } from '@mikro-orm/core'
 import { v4 } from 'uuid'
+import { BaseEntity } from './base.entity'
 import Test1 from './test1.entity'
 
 @Entity()
@@ -19,7 +21,7 @@ export default class Test4 {
   }
 
   @PrimaryKey()
-  id = v4()
+  id!: string
 
   @Property()
   name: string

@@ -1,5 +1,6 @@
-import { Options } from '@mikro-orm/core';
+import { Options } from '@mikro-orm/core'
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
+import { BaseEntity } from './entities/base.entity'
 import Test1 from './entities/test1.entity'
 import Test2 from './entities/test2.entity'
 import Test3 from './entities/test3.entity'
